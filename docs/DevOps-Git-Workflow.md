@@ -34,3 +34,4 @@
 - **On Pull Request**: Run tests & linting.
 - **On merge to develop**: Deploy to staging.
 - **On release tag push**: Deploy to production.
+
