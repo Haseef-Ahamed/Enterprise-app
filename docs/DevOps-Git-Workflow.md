@@ -74,13 +74,13 @@
 - **On Pull Request**: Run tests & linting.
 - **On merge to develop**: Deploy to staging.
 - **On release tag push**: Deploy to production.
-      ![alt text](image-14.png)
+![alt text](image-14.png)
 
-      ![alt text](image-15.png)
+![alt text](image-15.png)
 
-      ![alt text](image-16.png)
+![alt text](image-16.png)
 
-      ![alt text](image-17.png)
+![alt text](image-17.png)
 
 
 
