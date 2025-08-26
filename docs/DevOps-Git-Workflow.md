@@ -15,6 +15,7 @@
 - `feature/*`: New features
 - `bugfix/*`: Bug fixes
 - `hotfix/*`: Urgent production fixes
+![alt text](image.png)
 
 ## Pull Request (PR) Reviews
 1. Developer creates PR → merge into `develop` or `main`.
