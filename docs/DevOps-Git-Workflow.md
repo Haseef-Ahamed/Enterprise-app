@@ -43,9 +43,45 @@
 ![alt text](image-4.png)
 
 ## Assign the pull request 
+- **Assign the merge the source code from devevlop to main branch.**
+- **then add the title to identify the reviwer, why the request reaised for approval**
+- **Select the who is the review the code and documentation**
+![alt text](image-5.png)
+
+## How to Approval this Pull request from reviewer site
+![alt text](image-6.png)
+
+![alt text](image-7.png)
+
+**Check the Files and give the review**
+
+![alt text](image-8.png)
+
+![alt text](image-9.png)
+
+**Approved by reviewer so we can merge the all document**
+![alt text](image-10.png)
+
+![alt text](image-11.png)
+
+![alt text](image-12.png)
+
+**Verify the Merge is perfectly worked**
+![alt text](image-13.png)
 
 
 ## CI/CD Integration
 - **On Pull Request**: Run tests & linting.
 - **On merge to develop**: Deploy to staging.
 - **On release tag push**: Deploy to production.
+
+![alt text](image-14.png)
+
+![alt text](image-15.png)
+
+![alt text](image-16.png)
+
+![alt text](image-17.png)
+
+
+
