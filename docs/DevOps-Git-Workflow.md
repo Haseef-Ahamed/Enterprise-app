@@ -15,7 +15,7 @@
 - `feature/*`: New features
 - `bugfix/*`: Bug fixes
 - `hotfix/*`: Urgent production fixes
-![alt text](image.png)
+![alt text](branch.png)
 
 ## Pull Request (PR) Reviews
 1. Developer creates PR → merge into `develop` or `main`.
@@ -26,6 +26,9 @@
 - **Developer**: Works on `feature/*` or `bugfix/*` branches.
 - **Reviewer**: Reviews and approves PRs.
 - **Release Manager**: Creates releases, tags, and merges into `main`.
+![alt text](rule_Assign.png.png)
+![alt text](assign_permission.png)
+![alt text](image.png)
 
 ## Release Process
 - Run `./release.sh vX.Y.Z` to create a new release.
