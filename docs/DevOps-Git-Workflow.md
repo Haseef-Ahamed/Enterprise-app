@@ -15,6 +15,8 @@
 - `feature/*`: New features
 - `bugfix/*`: Bug fixes
 - `hotfix/*`: Urgent production fixes
+![alt text](image-1.png)
+
 
 ## Pull Request (PR) Reviews
 1. Developer creates PR → merge into `develop` or `main`.
@@ -35,3 +37,6 @@
 - **On merge to develop**: Deploy to staging.
 - **On release tag push**: Deploy to production.
 
+
+
+[def]: image.png
