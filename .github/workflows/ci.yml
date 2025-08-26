@@ -1,0 +1,27 @@
+name: CI/CD Pipeline
+
+on:
+  pull_request:
+    branches: [ develop, main ]
+  push:
+    branches: [ develop ]
+    tags: [ 'v*.*.*' ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Run Tests
+        run: echo "Running tests..."
+
+      - name: Deploy to Staging
+        if: github.ref == 'refs/heads/develop'
+        run: echo "Deploying to staging..."
+
+      - name: Deploy to Production
+        if: startsWith(github.ref, 'refs/tags/')
+        run: echo "Deploying to production..."
+
