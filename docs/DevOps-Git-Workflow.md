@@ -34,6 +34,10 @@
 - Run `./release.sh vX.Y.Z` to create a new release.
 - Script generates a changelog and pushes tag.
 
+![alt text](image-1.png)
+![alt text](run_script.png)
+
+
 ## CI/CD Integration
 - **On Pull Request**: Run tests & linting.
 - **On merge to develop**: Deploy to staging.
