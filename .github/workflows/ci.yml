@@ -14,14 +14,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Install Dependencies
+        run: npm install
+
       - name: Run Tests
-        run: echo "Running tests..."
+        run: npm test
 
-      - name: Deploy to Staging
-        if: github.ref == 'refs/heads/develop'
-        run: echo "Deploying to staging..."
-
-      - name: Deploy to Production
-        if: startsWith(github.ref, 'refs/tags/')
-        run: echo "Deploying to production..."
-
+      - name: Build
+        run: npm run build
