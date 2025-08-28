@@ -26,6 +26,7 @@
 - **Developer**: Works on `feature/*` or `bugfix/*` branches.
 - **Reviewer**: Reviews and approves PRs.
 - **Release Manager**: Creates releases, tags, and merges into `main`.
+
 ![alt text](rule_Assign.png.png)
 ![alt text](assign_permission.png)
 ![alt text](image.png)
