@@ -16,18 +16,13 @@
 
 ## Why GitFlow?
 
-Pros: 
+**Pros**
+- Clear separation of production, development, and feature work
+- Supports parallel development of multiple features
+- Easy to manage releases and hotfixes  
 
-Clear separation of production, development, and feature work
-
-Supports parallel development of multiple features
-
-Easy to manage releases and hotfixes
-
-Cons:
-
-Can be heavy for small teams or fast-paced releases
-
-Merge complexity increases with long-lived branches
+**Cons**
+- Can be heavy for small teams or fast-paced releases
+- Merge complexity increases with long-lived branches
 
 <!-- Comparison vs Trunk-Based Development -->
