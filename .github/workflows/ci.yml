@@ -28,7 +28,9 @@ jobs:
       # - name: Run Release Script
       #   if: startsWith(github.ref, 'refs/tags/')
       #   run: ./release.sh ${GITHUB_REF#refs/tags/}
-
+      - name: Make release.sh executable
+        run: chmod +x ./release.sh
+        
       - name: Deploy to Production
         if: startsWith(github.ref, 'refs/tags/')
         run: echo "Deploying to production..."
