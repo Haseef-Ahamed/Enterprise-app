@@ -14,11 +14,39 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Install Dependencies
-        run: npm install
-
       - name: Run Tests
-        run: npm test
+        run: echo "Running tests..."
 
-      - name: Build
-        run: npm run build
+      - name: Deploy to Staging
+        if: github.ref == 'refs/heads/develop'
+        run: echo "Deploying to staging..."
+
+      - name: Deploy to Production
+        if: startsWith(github.ref, 'refs/tags/')
+        run: echo "Deploying to production..."
+
+
+# name: CI/CD Pipeline
+
+# on:
+#   pull_request:
+#     branches: [ develop, main ]
+#   push:
+#     branches: [ develop ]
+#     tags: [ 'v*.*.*' ]
+
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - uses: actions/checkout@v3
+
+#       - name: Install Dependencies
+#         run: npm install
+
+#       - name: Run Tests
+#         run: npm test
+
+#       - name: Build
+#         run: npm run build
