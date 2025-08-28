@@ -1,3 +1,4 @@
+develop
 # Enterprise Git Workflow & DevOps Documentation
 ## Project: enterprise-app/
 ## Organization: Uvexzon
@@ -19,3 +20,4 @@
 **Cons**
 - Can be heavy for small teams or fast-paced releases
 - Merge complexity increases with long-lived branches
+# Enterprise Git Workflow + DevOps Documentation
