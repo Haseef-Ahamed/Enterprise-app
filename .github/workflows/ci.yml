@@ -22,8 +22,12 @@ jobs:
         run: echo "Deploying to staging..."
 
       - name: Run Release Script
-        if: startsWith(github.ref, 'refs/tags/')
-        run: ./release.sh ${GITHUB_REF#refs/tags/}
+        if: startsWith(github.ref, 'refs/tags/')   # only when a version tag is pushed
+        run: ./release.sh ${{ github.ref_name }}
+
+      # - name: Run Release Script
+      #   if: startsWith(github.ref, 'refs/tags/')
+      #   run: ./release.sh ${GITHUB_REF#refs/tags/}
 
       - name: Deploy to Production
         if: startsWith(github.ref, 'refs/tags/')
