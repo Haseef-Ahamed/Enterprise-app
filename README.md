@@ -19,4 +19,3 @@
 **Cons**
 - Can be heavy for small teams or fast-paced releases
 - Merge complexity increases with long-lived branches
-<!-- Comparison vs Trunk-Based Development -->
