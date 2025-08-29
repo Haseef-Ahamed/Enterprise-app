@@ -1,5 +1,10 @@
 # Changelog
 
+## main-20250829-2b746d0
+
+- Merge pull request #15 from Haseef-Ahamed/develop (2b746d0)
+
+
 ## develop-20250829-b6b5300
 
 - Merge branch 'main' into develop (b6b5300)
