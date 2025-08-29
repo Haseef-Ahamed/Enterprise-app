@@ -1,5 +1,16 @@
 # Changelog
 
+## develop-20250829-b6b5300
+
+- Merge branch 'main' into develop (b6b5300)
+- Merge pull request #14 from Haseef-Ahamed/develop (c4f4c3a)
+- chore(release): update changelog for develop-20250829-4951a4b (2280515)
+- Merge branch 'main' into develop (4951a4b)
+- chore(release): update changelog for develop-20250829-c43faed (51f5f18)
+- Merge pull request #13 from Haseef-Ahamed/develop (5dd3953)
+- chore(release): update changelog for develop-20250829-225d07d (b78ee30)
+
+
 develop
 ## develop-20250829-4d636c4
 
