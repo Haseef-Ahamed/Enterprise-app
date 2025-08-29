@@ -1,5 +1,6 @@
 # Changelog
 
+
 ## develop-20250829-c43faed
 
 - Make release script executable-Test (c43faed)
@@ -11,6 +12,12 @@
 - Merge pull request #12 from Haseef-Ahamed/develop (a4a894c)
 - Merge pull request #11 from Haseef-Ahamed/develop (2f3d87a)
 - Merge pull request #10 from Haseef-Ahamed/develop (6b64146)
+## develop-20250829-225d07d
+
+- Make release script executable (225d07d)
+- Merge branch 'develop' of https://github.com/Haseef-Ahamed/Enterprise-app into develop (b4670ee)
+- Make release script executable (f6ff84d)
+
 
 
 ## develop-20250829-504c91e
