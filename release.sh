@@ -20,10 +20,8 @@ git fetch origin --force
 
 # Check if tag already exists
 if git rev-parse "$VERSION" >/dev/null 2>&1; then
-  echo "⚠️  Tag $VERSION already exists. Skipping tag creation."
-  # Remove existing tag from local repo to avoid conflicts
-  git tag -d "$VERSION" 2>/dev/null || true
-  # Skip the rest of the release process for existing tags
+  echo "⚠️  Tag $VERSION already exists. Skipping release process."
+  # Exit with success code to prevent workflow failure
   exit 0
 fi
 

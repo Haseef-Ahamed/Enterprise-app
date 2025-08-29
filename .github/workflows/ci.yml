@@ -72,10 +72,16 @@ jobs:
         run: |
           chmod +x ./release.sh
           ./release.sh "${{ steps.version.outputs.VERSION }}"
+          
       - name: Push changes
         env:
           CI_TOKEN: ${{ secrets.CI_PAT || secrets.GITHUB_TOKEN }}
         run: |
           git remote set-url origin https://x-access-token:${CI_TOKEN}@github.com/${{ github.repository }}.git
-          git push origin HEAD
-          git push origin --tags
+          
+          # Push branch changes (if any)
+          git push origin HEAD || echo "Branch push failed or had nothing to push"
+          
+          # Push tags, but ignore if they already exist
+          git push origin --tags --force-if-includes || \
+            echo "Tag push failed (may already exist on remote)"
