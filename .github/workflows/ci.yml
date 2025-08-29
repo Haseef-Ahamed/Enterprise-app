@@ -5,16 +5,10 @@ on:
     branches:
       - develop
       - main
-  workflow_dispatch: # still allow manual trigger
-    inputs:
-      version:
-        description: "Version to release (e.g., v1.0.0)"
-        required: true
 
 jobs:
   release:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -29,14 +23,15 @@ jobs:
       - name: Run release script
         run: |
           chmod +x ./release.sh
-          ./release.sh ${{ github.event.inputs.version || 'v0.0.0-dev' }}
+          VERSION="v0.0.0-$(date +%Y%m%d)-${GITHUB_SHA::7}"
+          ./release.sh "$VERSION"
 
       - name: Push changes
         run: |
           git push origin HEAD
           git push origin --tags
           
-          
+
 # name: CI/CD Pipeline
 
 # on:
