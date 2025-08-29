@@ -1,5 +1,12 @@
 # Changelog
 
+## develop-20250829-225d07d
+
+- Make release script executable (225d07d)
+- Merge branch 'develop' of https://github.com/Haseef-Ahamed/Enterprise-app into develop (b4670ee)
+- Make release script executable (f6ff84d)
+
+
 ## develop-20250829-504c91e
 
 - Make release script executable (504c91e)
