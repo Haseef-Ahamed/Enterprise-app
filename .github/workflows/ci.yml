@@ -1,71 +1,85 @@
-name: CI/CD Pipeline
+name: Release Automation
 
 on:
-  pull_request:
-    branches: [ develop, main ]
   push:
-    branches: [ develop ]
+    branches: [ develop, main ]
     tags: [ 'v*.*.*' ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version to release (e.g., v1.0.0)"
+        required: true
+        type: string
 
 jobs:
-  build:
+  test:
+    # This job will run on all pushes and PRs to test code quality
+    if: github.event_name != 'workflow_dispatch'
     runs-on: ubuntu-latest
-
+    
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          fetch-tags: true
+          node-version: '18'
+          
+      - name: Run tests
+        run: |
+          echo "Running test suite..."
+          # Add your actual test commands here
+          # Example: npm install && npm test
 
-      - name: Run Tests
-        run: echo "Running tests..."
+  release:
+    # This job will only run on tags, specific branches, or manual triggers
+    needs: test
+    if: |
+      github.event_name == 'workflow_dispatch' || 
+      startsWith(github.ref, 'refs/tags/') || 
+      github.ref == 'refs/heads/main' || 
+      github.ref == 'refs/heads/develop'
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.CI_PAT || secrets.GITHUB_TOKEN }}  # Use PAT if available, fallback to GITHUB_TOKEN
 
-      - name: Deploy to Staging
-        if: github.ref == 'refs/heads/develop'
-        run: echo "Deploying to staging..."
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Make release.sh executable
-        run: chmod +x ./release.sh
+      - name: Determine version
+        id: version
+        run: |
+          if [ -n "${{ github.event.inputs.version }}" ]; then
+            echo "VERSION=${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
+          elif [[ "${{ github.ref }}" == refs/tags/* ]]; then
+            echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+          else
+            # Use branch name and commit hash for non-tag releases
+            BRANCH_NAME=${GITHUB_REF#refs/heads/}
+            echo "VERSION=${BRANCH_NAME}-$(date +%Y%m%d)-${GITHUB_SHA:0:7}" >> $GITHUB_OUTPUT
+          fi
+          echo "Using version: ${{ steps.version.outputs.VERSION }}"
 
-      - name: Run Release Script
-        if: startsWith(github.ref, 'refs/tags/')   # only when a version tag is pushed
-        run: ./release.sh ${GITHUB_REF#refs/tags/}
+      - name: Run release script
+        run: |
+          chmod +x ./release.sh
+          ./release.sh "${{ steps.version.outputs.VERSION }}"
 
-      # - name: Run Release Script
-      #   if: startsWith(github.ref, 'refs/tags/')
-      #   run: ./release.sh ${GITHUB_REF#refs/tags/}
-
-
-      - name: Deploy to Production
-        if: startsWith(github.ref, 'refs/tags/')
-        run: echo "Deploying to production..."
-
-
-# name: CI/CD Pipeline
-
-# on:
-#   pull_request:
-#     branches: [ develop, main ]
-#   push:
-#     branches: [ develop ]
-#     tags: [ 'v*.*.*' ]
-
-# jobs:
-#   build:
-#     runs-on: ubuntu-latest
-
-#     steps:
-#       - uses: actions/checkout@v3
-
-#       - name: Run Tests
-#         run: echo "Running tests..."
-
-#       - name: Deploy to Staging
-#         if: github.ref == 'refs/heads/develop'
-#         run: echo "Deploying to staging..."
-
-#       - name: Deploy to Production
-#         if: startsWith(github.ref, 'refs/tags/')
-#         run: echo "Deploying to production..."
-
-
-
+      - name: Push changes
+        env:
+          CI_TOKEN: ${{ secrets.CI_PAT || secrets.GITHUB_TOKEN }}
+        run: |
+          git remote set-url origin https://x-access-token:${CI_TOKEN}@github.com/${{ github.repository }}.git
+          git push origin HEAD
+          git push origin --tags
