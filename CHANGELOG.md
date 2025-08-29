@@ -1,5 +1,10 @@
 # Changelog
 
+## develop-20250829-4d636c4
+
+- fix: improve release script handling of existing tags (4d636c4)
+
+
 ## develop-20250829-b8bcd2f
 
 - Merge branch 'develop' of https://github.com/Haseef-Ahamed/Enterprise-app into develop (b8bcd2f)
