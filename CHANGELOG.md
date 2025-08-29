@@ -1,5 +1,11 @@
 # Changelog
 
+## develop-20250829-b8bcd2f
+
+- Merge branch 'develop' of https://github.com/Haseef-Ahamed/Enterprise-app into develop (b8bcd2f)
+- Fixed the Duplicate tag error (4fc6cae)
+
+
 ## develop-20250829-47064c8
 
 -  Testing21212 (47064c8)
