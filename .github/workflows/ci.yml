@@ -77,7 +77,7 @@ jobs:
 
       - name: Push changes
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }} # Use your PAT secret
         run: |
           git push origin HEAD
           git push origin --tags
