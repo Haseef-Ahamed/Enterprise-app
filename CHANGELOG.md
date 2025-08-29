@@ -1,5 +1,33 @@
 # Changelog
 
+## develop-20250829-b6b5300
+
+- Merge branch 'main' into develop (b6b5300)
+- Merge pull request #14 from Haseef-Ahamed/develop (c4f4c3a)
+- chore(release): update changelog for develop-20250829-4951a4b (2280515)
+- Merge branch 'main' into develop (4951a4b)
+- chore(release): update changelog for develop-20250829-c43faed (51f5f18)
+- Merge pull request #13 from Haseef-Ahamed/develop (5dd3953)
+- chore(release): update changelog for develop-20250829-225d07d (b78ee30)
+
+
+develop
+## develop-20250829-4d636c4
+
+- fix: improve release script handling of existing tags (4d636c4)
+
+
+## develop-20250829-b8bcd2f
+
+- Merge branch 'develop' of https://github.com/Haseef-Ahamed/Enterprise-app into develop (b8bcd2f)
+- Fixed the Duplicate tag error (4fc6cae)
+
+
+## develop-20250829-47064c8
+
+-  Testing21212 (47064c8)
+-  Testing21212 (69a64dc)
+
 ## develop-20250829-4951a4b
 
 - Merge branch 'main' into develop (4951a4b)
@@ -25,6 +53,7 @@
 - Merge branch 'develop' of https://github.com/Haseef-Ahamed/Enterprise-app into develop (b4670ee)
 - Make release script executable (f6ff84d)
 
+main
 
 
 ## develop-20250829-504c91e

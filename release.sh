@@ -18,6 +18,13 @@ fi
 git fetch --tags --force
 git fetch origin --force
 
+# Check if tag already exists
+if git rev-parse "$VERSION" >/dev/null 2>&1; then
+  echo "⚠️  Tag $VERSION already exists. Skipping release process."
+  # Exit with success code to prevent workflow failure
+  exit 0
+fi
+
 # Determine current branch (handles detached HEAD in CI)
 if [ -n "$GITHUB_HEAD_REF" ]; then
   CURRENT_BRANCH="$GITHUB_HEAD_REF"
