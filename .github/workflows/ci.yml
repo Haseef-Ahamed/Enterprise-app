@@ -2,13 +2,21 @@ name: Release
 
 on:
   push:
+    tags:
+      - "v*.*.*"
     branches:
       - develop
       - main
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version to release (e.g., v1.0.0)"
+        required: true
 
 jobs:
   release:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -23,7 +31,11 @@ jobs:
       - name: Run release script
         run: |
           chmod +x ./release.sh
+          VERSION="${{ github.event.inputs.version }}"
+          if [ -z "$VERSION" ]; then
+            # fallback: use branch + short commit hash
           VERSION="v0.0.0-$(date +%Y%m%d)-${GITHUB_SHA::7}"
+          fi
           ./release.sh "$VERSION"
 
       - name: Push changes
