@@ -83,3 +83,5 @@ jobs:
           git remote set-url origin https://x-access-token:${CI_TOKEN}@github.com/${{ github.repository }}.git
           git push origin HEAD
           git push origin --tags
+
+          # Hsf
