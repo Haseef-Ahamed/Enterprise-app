@@ -1,4 +1,4 @@
-name: Release
+name: Release Automation
 
 on:
   push:
@@ -12,70 +12,45 @@ on:
       version:
         description: "Version to release (e.g., v1.0.0)"
         required: true
+        type: string
 
 jobs:
   release:
     runs-on: ubuntu-latest
-
+    # Only run on workflow_dispatch or tag pushes, not on regular branch pushes
+    if: github.event_name == 'workflow_dispatch' || startsWith(github.ref, 'refs/tags/')
+    
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Configure Git
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
+      - name: Determine version
+        id: version
+        run: |
+          if [ -n "${{ github.event.inputs.version }}" ]; then
+            echo "VERSION=${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
+          elif [[ "${{ github.ref }}" == refs/tags/* ]]; then
+            echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+          else
+            echo "VERSION=v0.0.0-$(date +%Y%m%d)-${GITHUB_SHA:0:7}" >> $GITHUB_OUTPUT
+          fi
+
       - name: Run release script
         run: |
           chmod +x ./release.sh
-          VERSION="${{ github.event.inputs.version }}"
-          if [ -z "$VERSION" ]; then
-            # fallback: use branch + short commit hash
-          VERSION="v0.0.0-$(date +%Y%m%d)-${GITHUB_SHA::7}"
-          fi
-          ./release.sh "$VERSION"
+          ./release.sh "${{ steps.version.outputs.VERSION }}"
 
       - name: Push changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git push origin HEAD
           git push origin --tags
-          
-
-# name: CI/CD Pipeline
-
-# on:
-#   pull_request:
-#     branches: [ develop, main ]
-#   push:
-#     branches: [ develop ]
-#     tags: [ 'v*.*.*' ]
-
-# jobs:
-#   build:
-#     runs-on: ubuntu-latest
-
-#     steps:
-#       - uses: actions/checkout@v3
-#         with:
-#           fetch-tags: true
-
-#       - name: Run Tests
-#         run: echo "Running tests..."
-
-#       - name: Deploy to Staging
-#         if: github.ref == 'refs/heads/develop'
-#         run: echo "Deploying to staging..."
-
-#       - name: Make release.sh executable
-#         run: chmod +x ./release.sh
-
-#       - name: Run Release Script
-#         if: startsWith(github.ref, 'refs/tags/')   # only when a version tag is pushed
-#         run: ./release.sh ${GITHUB_REF#refs/tags/}
-
-#       - name: Deploy to Production
-#         if: startsWith(github.ref, 'refs/tags/')
-#         run: echo "Deploying to production..."
