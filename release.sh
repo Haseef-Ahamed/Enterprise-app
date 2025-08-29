@@ -29,8 +29,16 @@ git commit -m "chore(release): update changelog for $VERSION" || echo "No change
 # Tag release
 git tag -a "$VERSION" -m "Release $VERSION"
 
+# Detect current branch
+CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+
+# If detached HEAD (common in GitHub Actions), fall back to env var
+if [ "$CURRENT_BRANCH" = "HEAD" ]; then
+  CURRENT_BRANCH="${GITHUB_REF_NAME:-develop}"  # default to develop if not set
+fi
+
 # Push branch + tag
-git push origin main
+git push origin "$CURRENT_BRANCH"
 git push origin "$VERSION"
 
-echo "✅ Release $VERSION completed!"
+echo "✅ Release $VERSION completed on branch $CURRENT_BRANCH!"
